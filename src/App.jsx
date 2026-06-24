@@ -8,7 +8,9 @@ function App() {
     queryFn: () =>
       fetch("http://localhost:3000/api/v1/blogs").then((res) => res.json()),
   });
-  console.log(data);
+
+  //console.log(data);
+  
   if (isPending) return <p>Loading...</p>;
   if (error) return <p>{error.message}</p>;
 
