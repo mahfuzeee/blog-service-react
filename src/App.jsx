@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Admin from "./pages/Admin";
-import CreatePost from "./pages/CreatePost";
+import Create from "./pages/Create";
 import GetSinglePost from "./pages/GetSinglePost";
 import EditPost from "./pages/EditPost";
 import "./App.css";
@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/createpost" element={<CreatePost />} />
+        <Route path="/create" element={<Create />} />
         <Route path="/getsinglepost" element={<GetSinglePost />} />
         <Route path="/editpost" element={<EditPost />} />
       </Routes>
