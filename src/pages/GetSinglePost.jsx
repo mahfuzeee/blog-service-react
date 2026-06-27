@@ -1,7 +1,10 @@
+import { useParams } from "react-router-dom";
+import GetPostById from "../components/GetPostById";
 const GetSinglePost = () => {
+  const { id } = useParams();
   return (
     <div>
-      <h1>Get Single Post</h1>
+      <GetPostById id={id} />
     </div>
   );
 };
