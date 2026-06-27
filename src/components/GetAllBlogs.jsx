@@ -8,8 +8,9 @@ export const GetAllBlogs = () => {
     <div>
       {data.map((blog) => (
         <div key={blog._id}>
-          <h2>{blog.title}</h2>
-          <p>{blog.body}</p>
+          <h2 className="text-lg font-bold text-center p-2">{blog.title}</h2>
+          <p className="pb-2 px-4">{blog.body}</p>
+          <p className="pb-2 px-4">Author: {blog.author}</p>
         </div>
       ))}
     </div>
