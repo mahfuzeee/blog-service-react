@@ -20,26 +20,26 @@ const CreatePost = () => {
       <h1 className="text-lg font-bold mt-4 p-2">Create Post</h1>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-4 mt-2 bg-gray-100 border rounded p-4"
+        className="flex flex-col gap-4 mt-2 bg-gray-300 border rounded p-4"
       >
         <input
           type="text"
           name="title"
           required
           placeholder="Title"
-          className="border rounded p-2"
+          className="border rounded p-2 mb-2 bg-white text-black"
         />
         <textarea
           name="body"
           placeholder="Body"
-          className="border rounded p-2"
+          className="border rounded p-2 mb-2 bg-white text-black"
         />
         <input
           type="text"
           name="author"
           required
           placeholder="Author"
-          className="border rounded p-2"
+          className="border rounded p-2 mb-2 bg-white text-black"
         />
         <button
           type="submit"

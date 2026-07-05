@@ -1,10 +1,9 @@
-import CreatePost from "../components/CreatePost";
+import { EditBlog } from "../components/EditBlog";
 function EditPost() {
   return (
     <div>
       <h1>Edit Post</h1>
-      <button className="btn btn-primary">Edit</button>
-      <CreatePost />
+      <EditBlog />
     </div>
   );
 }
