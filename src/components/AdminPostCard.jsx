@@ -1,5 +1,5 @@
 import { Navigate, Link } from "react-router-dom";
-import { EditBlog } from "./EditBlog";
+import EditBlog from "./EditBlog";
 import DeleteBlog from "./DeleteBlog";
 
 function AdminPostCard({ blog }) {
@@ -9,7 +9,13 @@ function AdminPostCard({ blog }) {
       <p className="p-2a">{blog["body"]}</p>
       <p>Author: {blog["author"]}</p>
       <div className="flex gap-2 px-4">
-        <EditBlog id={blog._id} />
+        <Link
+          to={"/editpost/" + blog?._id}
+          state={"edit"}
+          className="btn btn-primary"
+        >
+          Edit
+        </Link>
         <DeleteBlog id={blog._id} />
       </div>
     </div>

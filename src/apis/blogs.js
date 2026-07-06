@@ -28,6 +28,7 @@ export const createPost = async (blog) => {
 export const getBlogById = async (id) => {
   try {
     const res = await fetch(`${baseUrl}/${id}`);
+    console.log(res);
     return res.json();
   } catch (error) {
     console.log("error occured while fetching the data from the server", error);
