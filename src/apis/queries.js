@@ -31,9 +31,9 @@ export const useGetBlogById = (id) => {
 };
 
 //Edit a blog
-export const useEditBlog = (id, blog) => {
+export const useEditBlog = (blog) => {
   return useMutation({
-    mutationFn: async (id, blog) => await editBlog(id, blog),
+    mutationFn: async (blog) => await editBlog(blog.id, blog),
   });
 };
 

@@ -1,4 +1,5 @@
 const baseUrl = import.meta.env.VITE_BASE_URL;
+
 export const getAllBlogs = async () => {
   try {
     const res = await fetch(baseUrl);
@@ -28,7 +29,7 @@ export const createPost = async (blog) => {
 export const getBlogById = async (id) => {
   try {
     const res = await fetch(`${baseUrl}/${id}`);
-    console.log(res);
+
     return res.json();
   } catch (error) {
     console.log("error occured while fetching the data from the server", error);
@@ -39,7 +40,7 @@ export const getBlogById = async (id) => {
 export const editBlog = async (id, blog) => {
   try {
     const res = await fetch(`${baseUrl}/${id}`, {
-      method: "PATCH",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },

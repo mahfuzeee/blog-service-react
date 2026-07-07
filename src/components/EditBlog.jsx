@@ -1,8 +1,10 @@
 import { useEditBlog, useGetBlogById } from "../apis/queries";
+import { useNavigate } from "react-router-dom";
 
 const EditBlog = (porps) => {
   const { data, isLoading, isError } = useGetBlogById(porps.id);
   const { mutateAsync } = useEditBlog();
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -14,7 +16,7 @@ const EditBlog = (porps) => {
         author: e.target.author.value,
       });
       alert("post edited successfully");
-      e.target.reset();
+      navigate("/admin");
     } catch (error) {
       console.error("error occured while editing the blog", error);
     }
