@@ -8,7 +8,7 @@ function GetPostById({ id }) {
   return (
     <div className="flex flex-col items-center p-2 mt-4 gap-3">
       <h1 className="text-lg font-bold ">{data["title"]}</h1>
-      <p className="p-2a">{data["body"]}</p>
+      <p className="p-2">{data["body"]}</p>
       <p>Author: {data.author?.name ?? data.author?.email ?? data.author}</p>
     </div>
   );

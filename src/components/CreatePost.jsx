@@ -1,4 +1,3 @@
-import { use } from "react";
 import { useCreatePost } from "../apis/queries";
 
 const CreatePost = () => {

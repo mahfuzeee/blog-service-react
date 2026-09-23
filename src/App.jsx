@@ -4,11 +4,13 @@ import Admin from "./pages/Admin";
 import Create from "./pages/Create";
 import GetSinglePost from "./pages/GetSinglePost";
 import EditPost from "./pages/EditPost";
+import Navbar from "./components/Navbar";
 import "./App.css";
 
 function App() {
   return (
     <BrowserRouter>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/admin" element={<Admin />} />
