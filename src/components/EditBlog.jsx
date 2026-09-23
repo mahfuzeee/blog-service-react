@@ -2,7 +2,7 @@ import { useEditBlog, useGetBlogById } from "../apis/queries";
 import { useNavigate } from "react-router-dom";
 
 const EditBlog = (porps) => {
-  const { data, isLoading, isError } = useGetBlogById(porps.id);
+  const { data, isLoading, isError, error } = useGetBlogById(porps.id);
   const { mutateAsync } = useEditBlog();
   const navigate = useNavigate();
 
@@ -49,7 +49,9 @@ const EditBlog = (porps) => {
         />
         <input
           type="text"
-          defaultValue={data["author"]}
+          defaultValue={
+            data.author?.name ?? data.author?.email ?? data.author ?? ""
+          }
           name="author"
           required
           placeholder="Author"

@@ -3,7 +3,7 @@ import client from "./client";
 export const getAllBlogs = async () => {
   try {
     const res = await client.get("/blogs");
-    return res.data;
+    return res.data.data;
   } catch (error) {
     console.error(
       "error occurred while fetching the data from the server",
