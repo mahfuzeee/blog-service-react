@@ -16,6 +16,7 @@ const EditBlog = (porps) => {
         author: e.target.author.value,
       });
       alert("post edited successfully");
+      await new Promise((resolve) => setTimeout(resolve, 1500));
       navigate("/admin");
     } catch (error) {
       console.error("error occured while editing the blog", error);

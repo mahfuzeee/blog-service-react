@@ -1,81 +1,61 @@
-const baseUrl = import.meta.env.VITE_BASE_URL;
+import client from "./client";
 
 export const getAllBlogs = async () => {
   try {
-    const res = await fetch(baseUrl);
-    return res.json();
+    const res = await client.get("/blogs");
+    return res.data;
   } catch (error) {
-    console.log("error occured while fetching the data from the server", error);
+    console.error(
+      "error occurred while fetching the data from the server",
+      error,
+    );
+    throw error;
   }
 };
 
 //Create a new post
 export const createPost = async (blog) => {
   try {
-    const res = await fetch(baseUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(blog),
-    });
-    return res.json();
+    const res = await client.post("/blogs", blog);
+    return res.data;
   } catch (error) {
-    console.log("error occured while creating the blog", error);
+    console.error("error occurred while creating the blog", error);
+    throw error;
   }
 };
 
 //Get a blog by Id
 export const getBlogById = async (id) => {
   try {
-    const res = await fetch(`${baseUrl}/${id}`);
-
-    return res.json();
+    const res = await client.get(`/blogs/${id}`);
+    return res.data;
   } catch (error) {
-    console.log("error occured while fetching the data from the server", error);
+    console.error(
+      "error occurred while fetching the data from the server",
+      error,
+    );
+    throw error;
   }
 };
 
 //Edit a blog post
 export const editBlog = async (id, blog) => {
   try {
-    const res = await fetch(`${baseUrl}/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(blog),
-    });
-    return res.json();
+    const res = await client.put(`/blogs/${id}`, blog);
+    return res.data;
   } catch (error) {
-    console.log("error occured while updating the blog", error);
-  }
-};
-
-//Update a blog
-export const updateBlog = async (id, blog) => {
-  try {
-    const res = await fetch(`${baseUrl}/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(blog),
-    });
-    return res.json();
-  } catch (error) {
-    console.log("error occured while updating the blog", error);
+    console.error("error occurred while updating the blog", error);
+    throw error;
   }
 };
 
 //Delete a blog
 export const deleteBlog = async (id) => {
   try {
-    const res = await fetch(`${baseUrl}/${id}`, {
-      method: "DELETE",
-    });
-    return res.json();
+    const res = await client.delete(`/blogs/${id}`);
+    return res.data;
   } catch (error) {
-    console.log("error occured while deleting the blog", error);
+    console.error("error occurred while deleting the blog", error);
+    throw error;
   }
 };

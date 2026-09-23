@@ -3,7 +3,6 @@ import {
   getAllBlogs,
   createPost,
   deleteBlog,
-  updateBlog,
   getBlogById,
   editBlog,
 } from "./blogs";
@@ -41,12 +40,5 @@ export const useEditBlog = (blog) => {
 export const useDeleteBlog = () => {
   return useMutation({
     mutationFn: async (id) => await deleteBlog(id),
-  });
-};
-
-//Update a blog
-export const useUpdateBlog = () => {
-  return useMutation({
-    mutationFn: async (blog) => await updateBlog(blog),
   });
 };
