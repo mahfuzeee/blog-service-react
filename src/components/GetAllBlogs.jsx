@@ -6,7 +6,12 @@ export const GetAllBlogs = () => {
   const { user } = useAuth();
   const { data, isLoading, isError, error } = useGetAllBlogs();
   const { deleteBlog } = useDeleteBlog();
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading)
+    return (
+      <div className="flex justify-center align-center">
+        <Spinner />
+      </div>
+    );
   if (isError) return <p>{error.message}</p>;
   const allBlogs = Array.isArray(data) ? data : [];
 
