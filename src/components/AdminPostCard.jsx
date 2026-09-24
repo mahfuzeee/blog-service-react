@@ -8,13 +8,6 @@ function AdminPostCard({ blog }) {
       <p className="p-2 w-[90%]">{blog["body"]}</p>
       <p>Author: {blog.author?.name ?? blog.author?.email ?? blog.author}</p>
       <div className="flex gap-2 px-4">
-        <Link
-          to={"/editpost/" + blog?._id}
-          state={"edit"}
-          className="rounded bg-blue-500 px-4 py-2 text-white transition hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-        >
-          Edit
-        </Link>
         <DeleteBlog id={blog._id} />
       </div>
     </div>
