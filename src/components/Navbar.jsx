@@ -32,7 +32,7 @@ export default function Navbar() {
           {user ? (
             <>
               <Link
-                to="/new"
+                to="/create"
                 className="rounded-[4px] bg-accent px-3.5 py-1.5 text-[0.85rem] tracking-[0.02em] text-white transition-colors hover:bg-accent-hover"
               >
                 Write

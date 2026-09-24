@@ -36,7 +36,15 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/post/:id" element={<BlogDetail />} />
+        <Route
+          path="/blogs/:id/edit"
+          element={
+            <ProtectedRoute>
+              <BlogForm />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/blogs/:id" element={<BlogDetail />} />
         <Route path="/editpost/:id" element={<EditPost />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
       </Routes>

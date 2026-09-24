@@ -1,7 +1,6 @@
-import { useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-import { useGetAllBlogs, useDeleteBlog, useGetComments } from "../apis/queries";
+import { useDeleteBlog, useGetComments, useGetBlogById } from "../apis/queries";
 
 import { useAuth } from "../context/AuthContext";
 import { formatDate, getInitials } from "../utils/helpers";
@@ -13,9 +12,9 @@ export default function BlogDetail() {
   const navigate = useNavigate();
   const { user } = useAuth();
 
-  const { data: blog, isLoading: loading, isError: error } = useGetAllBlogs();
+  const { data: blog, isLoading: loading, isError: error } = useGetBlogById(id);
 
-  const { data: comments } = useGetComments(id);
+  const { data: comments = [], refetch } = useGetComments(id);
 
   const { deleteBlog } = useDeleteBlog();
   const handleDelete = async () => {
@@ -97,11 +96,7 @@ export default function BlogDetail() {
 
       <hr className="my-12 border-0 border-t border-line" />
 
-      <CommentSection
-        blogId={id}
-        comments={comments}
-        onRefresh={fetchComments}
-      />
+      <CommentSection blogId={id} comments={comments} onRefresh={refetch} />
     </main>
   );
 }

@@ -30,7 +30,7 @@ export function EmptyState({ icon = "📭", title, description }) {
 }
 
 export function BlogCard({ blog, onDelete, isOwner }) {
-  const authorName = blog.author?.name || blog.authorName || "Anonymous";
+  const authorName = blog.author?.name || "Anonymous";
   const date = blog.createdAt
     ? new Date(blog.createdAt).toLocaleDateString("en-US", {
         month: "short",

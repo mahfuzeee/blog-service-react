@@ -27,7 +27,7 @@ export const GetAllBlogs = () => {
         </h1>
         {user && (
           <a
-            href="/new"
+            href="/create"
             className="inline-flex items-center justify-center rounded-[4px] bg-accent px-5 py-2 font-body text-[0.9rem] text-white transition-colors hover:bg-accent-hover"
           >
             + Write
