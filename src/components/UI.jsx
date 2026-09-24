@@ -29,6 +29,7 @@ export function EmptyState({ icon = "📭", title, description }) {
   );
 }
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
 export function BlogCard({ blog, onDelete, isOwner }) {
   const authorName = blog.author?.name || "Anonymous";
   const date = blog.createdAt
@@ -52,7 +53,7 @@ export function BlogCard({ blog, onDelete, isOwner }) {
         <span>{date}</span>
       </div>
       <a
-        href={`/blogs/${blog._id}`}
+        href={`${baseUrl}/blogs/${blog._id}`}
         className="mb-2 block font-display text-[1.35rem] font-semibold leading-[1.3] text-ink transition-colors hover:text-accent"
       >
         {blog.title}
@@ -61,7 +62,7 @@ export function BlogCard({ blog, onDelete, isOwner }) {
       {isOwner && (
         <div className="mt-3 flex gap-4">
           <a
-            href={`/blogs/${blog._id}/edit`}
+            href={`${baseUrl}/blogs/${blog._id}/edit`}
             className="bg-transparent p-0 text-[0.85rem] text-muted transition-colors hover:text-accent"
           >
             Edit
