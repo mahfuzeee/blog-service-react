@@ -1,8 +1,10 @@
 import client from "./client";
+import toast from "react-hot-toast";
 
 export const getAllBlogs = async () => {
   try {
     const res = await client.get("/blogs");
+    toast.success("Blog fetched successfully");
     return res.data.data;
   } catch (error) {
     console.error(
@@ -17,6 +19,7 @@ export const getAllBlogs = async () => {
 export const createBlog = async (blog) => {
   try {
     const res = await client.post("/blogs", blog);
+    toast.success("Blog created successfully");
     return res.data;
   } catch (error) {
     console.error("error occurred while creating the blog", error);
@@ -42,6 +45,7 @@ export const getBlogById = async (id) => {
 export const editBlog = async (id, blog) => {
   try {
     const res = await client.put(`/blogs/${id}`, blog);
+    toast.success("Blog edited successfully");
     return res.data;
   } catch (error) {
     console.error("error occurred while updating the blog", error);
@@ -53,6 +57,7 @@ export const editBlog = async (id, blog) => {
 export const deleteBlog = async (id) => {
   try {
     const res = await client.delete(`/blogs/${id}`);
+    toast.success("Blog deleted successfully");
     return res.data;
   } catch (error) {
     console.error("error occurred while deleting the blog", error);
