@@ -5,7 +5,7 @@ export const getAllBlogs = async () => {
   try {
     const res = await client.get("/blogs");
     toast.success("Blog fetched successfully");
-    return res.data.data;
+    return res.data.data ?? [];
   } catch (error) {
     console.error(
       "error occurred while fetching the data from the server",
@@ -31,7 +31,7 @@ export const createBlog = async (blog) => {
 export const getBlogById = async (id) => {
   try {
     const res = await client.get(`/blogs/${id}`);
-    return res.data.data;
+    return res.data.data ?? {};
   } catch (error) {
     console.error(
       "error occurred while fetching the data from the server",
