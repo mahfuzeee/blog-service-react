@@ -7,6 +7,8 @@ import {
   editBlog,
 } from "./blogs";
 
+import { createComment, getComments } from "./comments";
+
 export const useGetAllBlogs = () => {
   return useQuery({
     queryKey: ["blogs"],
@@ -40,5 +42,20 @@ export const useEditBlog = () => {
 export const useDeleteBlog = () => {
   return useMutation({
     mutationFn: async (id) => await deleteBlog(id),
+  });
+};
+
+//Create a comment
+export const useCreateComment = () => {
+  return useMutation({
+    mutationFn: async (comment) => await createComment(comment),
+  });
+};
+
+//Get comments
+export const useGetComments = (id) => {
+  return useQuery({
+    queryKey: ["comments", id],
+    queryFn: async () => await getComments(id),
   });
 };
