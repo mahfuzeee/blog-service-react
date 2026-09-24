@@ -1,7 +1,7 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
 import {
   getAllBlogs,
-  createPost,
+  createBlog,
   deleteBlog,
   getBlogById,
   editBlog,
@@ -17,9 +17,9 @@ export const useGetAllBlogs = () => {
 };
 
 //Create a new post
-export const useCreatePost = () => {
+export const useCreateBlog = () => {
   return useMutation({
-    mutationFn: async (blog) => await createPost(blog),
+    mutationFn: async (blog) => await createBlog(blog),
   });
 };
 
@@ -28,6 +28,7 @@ export const useGetBlogById = (id) => {
   return useQuery({
     queryKey: ["blog", id],
     queryFn: async () => await getBlogById(id),
+    enabled: Boolean(id),
   });
 };
 

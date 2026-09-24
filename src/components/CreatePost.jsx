@@ -1,7 +1,7 @@
-import { useCreatePost } from "../apis/queries";
+import { useCreateBlog } from "../apis/queries";
 
 const CreatePost = () => {
-  const { mutateAsync } = useCreatePost();
+  const { mutateAsync } = useCreateBlog();
 
   async function handleSubmit(e) {
     e.preventDefault();

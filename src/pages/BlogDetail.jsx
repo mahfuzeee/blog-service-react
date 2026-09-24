@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getBlog, deleteBlog } from "../api/blogs";
-import { getComments } from "../api/comments";
+
+import { useGetAllBlogs, useDeleteBlog, useGetComments } from "../apis/queries";
+
 import { useAuth } from "../context/AuthContext";
 import { formatDate, getInitials } from "../utils/helpers";
 import { Spinner, ErrorMessage } from "../components/UI";
@@ -12,33 +13,11 @@ export default function BlogDetail() {
   const navigate = useNavigate();
   const { user } = useAuth();
 
-  const [blog, setBlog] = useState(null);
-  const [comments, setComments] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const { data: blog, isLoading: loading, isError: error } = useGetAllBlogs();
 
-  const fetchComments = useCallback(async () => {
-    try {
-      const res = await getComments(id);
-      setComments(res.data.data || res.data.comments || res.data || []);
-    } catch {}
-  }, [id]);
+  const { data: comments } = useGetComments(id);
 
-  useEffect(() => {
-    const load = async () => {
-      try {
-        const res = await getBlog(id);
-        setBlog(res.data.data || res.data.blog || res.data);
-        await fetchComments();
-      } catch {
-        setError("Blog not found.");
-      } finally {
-        setLoading(false);
-      }
-    };
-    load();
-  }, [id, fetchComments]);
-
+  const { deleteBlog } = useDeleteBlog();
   const handleDelete = async () => {
     if (!confirm("Delete this blog?")) return;
     try {

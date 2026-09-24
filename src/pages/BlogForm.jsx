@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { createBlog, getBlog, updateBlog } from "../api/blogs";
+import { useCreateBlog, useGetBlogById, useEditBlog } from "../apis/queries";
 import { ErrorMessage } from "../components/UI";
 
 export default function BlogForm() {
@@ -8,53 +8,55 @@ export default function BlogForm() {
   const navigate = useNavigate();
   const isEdit = Boolean(id);
 
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [loading, setLoading] = useState(isEdit);
-  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const { data, isLoading, isError, error: queryError } = useGetBlogById(id);
+  const { mutateAsync: createBlog, isPending: isCreating } = useCreateBlog();
+  const { mutateAsync: editBlog, isPending: isEditing } = useEditBlog();
+  const submitting = isCreating || isEditing;
 
-  useEffect(() => {
-    if (!isEdit) return;
-    getBlog(id)
-      .then((res) => {
-        const blog = res.data.data || res.data.blog || res.data;
-        setTitle(blog.title || "");
-        setContent(blog.content || "");
-      })
-      .catch(() => setError("Failed to load blog."))
-      .finally(() => setLoading(false));
-  }, [id, isEdit]);
+  const blog = data?.data || data?.blog || data;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!title.trim() || !content.trim()) {
+    const formData = new FormData(e.currentTarget);
+    const title = formData.get("title").trim();
+    const content = formData.get("content").trim();
+
+    if (!title || !content) {
       setError("Title and content are required.");
       return;
     }
-    setSubmitting(true);
     setError("");
     try {
       if (isEdit) {
-        await updateBlog(id, { title, content });
+        await editBlog({ id, title, content });
         navigate(`/blogs/${id}`);
       } else {
         const res = await createBlog({ title, content });
-        const blog = res.data.data || res.data.blog || res.data;
-        navigate(`/blogs/${blog._id}`);
+        const createdBlog = res?.data || res?.blog || res;
+        navigate(`/blogs/${createdBlog._id}`);
       }
     } catch (err) {
       setError(err.response?.data?.message || "Failed to save blog.");
-    } finally {
-      setSubmitting(false);
     }
   };
 
-  if (loading)
+  if (isLoading)
     return (
       <div className="mx-auto flex max-w-[680px] items-center justify-center px-6 py-12 pb-24">
-        Loading…
+        Loading...
       </div>
+    );
+
+  if (isError)
+    return (
+      <main className="mx-auto max-w-[780px] px-6 py-12 pb-24 max-sm:px-4 max-sm:py-8 max-sm:pb-16">
+        <ErrorMessage
+          message={
+            queryError?.response?.data?.message || "Failed to load blog."
+          }
+        />
+      </main>
     );
 
   return (
@@ -78,8 +80,8 @@ export default function BlogForm() {
           <input
             type="text"
             placeholder="Story title…"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            name="title"
+            defaultValue={blog?.title || ""}
             className="w-full border-0 border-b border-line bg-transparent px-0 py-2 font-display text-[1.6rem] outline-none focus:border-accent"
             maxLength={200}
           />
@@ -87,8 +89,8 @@ export default function BlogForm() {
         <div className="mb-[18px]">
           <textarea
             placeholder="Tell your story…"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
+            name="content"
+            defaultValue={blog?.content || ""}
             className="min-h-[360px] w-full resize-y border-0 border-t border-line bg-transparent px-0 py-4 font-body text-[1.05rem] leading-[1.7] outline-none focus:border-transparent"
             rows={18}
           />

@@ -8,8 +8,8 @@ import EditPost from "./pages/EditPost";
 import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import BlogForm from "./components/BlogForm";
-import BlogDetail from "./components/BlogDetail";
+import BlogForm from "./pages/BlogForm";
+import BlogDetail from "./pages/BlogDetail";
 import "./App.css";
 
 function App() {

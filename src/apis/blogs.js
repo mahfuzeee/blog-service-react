@@ -14,7 +14,7 @@ export const getAllBlogs = async () => {
 };
 
 //Create a new post
-export const createPost = async (blog) => {
+export const createBlog = async (blog) => {
   try {
     const res = await client.post("/blogs", blog);
     return res.data;
